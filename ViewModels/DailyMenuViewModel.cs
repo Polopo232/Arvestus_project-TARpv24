@@ -9,8 +9,10 @@ namespace Arvestus_project_TARpv24.ViewModels
     public class DailyMenuViewModel : BaseViewModel
     {
         private readonly DatabaseService _databaseService;
+        private readonly SessionService _sessionService;
         private DateTime _selectedDate = DateTime.Today;
 
+        public SessionService Session => _sessionService;
         public ObservableCollection<Dish> DailyDishes { get; set; } = new ObservableCollection<Dish>();
 
         public DateTime SelectedDate
@@ -27,9 +29,10 @@ namespace Arvestus_project_TARpv24.ViewModels
         public ICommand SelectDishCommand { get; }
         public ICommand AddCurrentDishToDailyCommand { get; }
 
-        public DailyMenuViewModel(DatabaseService databaseService)
+        public DailyMenuViewModel(DatabaseService databaseService, SessionService sessionService)
         {
             _databaseService = databaseService;
+            _sessionService = sessionService;
 
             LoadDailyMenuCommand = new Command(async () => await LoadDailyMenuAsync());
             SelectDishCommand = new Command<Dish>(async (dish) => await OpenDishDetailAsync(dish));

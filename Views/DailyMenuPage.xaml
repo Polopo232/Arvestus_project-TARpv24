@@ -43,10 +43,11 @@
         </CollectionView>
 
         <Button Grid.Row="2"
-                Text="Määra esimene toit tänaseks"
-                Command="{Binding AddCurrentDishToDailyCommand}"
-                BackgroundColor="#512BD4"
-                TextColor="White" />
+            Text="Määra esimene toit tänaseks"
+            Command="{Binding AddCurrentDishToDailyCommand}"
+            IsVisible="{Binding Session.IsAdmin}"
+            BackgroundColor="#512BD4"
+            TextColor="White" />
 
     </Grid>
 </ContentPage>

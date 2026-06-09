@@ -56,10 +56,11 @@
         </CollectionView>
 
         <Button Grid.Row="2"
-                Text="Lisa testtoit"
-                Command="{Binding AddTestDishCommand}"
-                BackgroundColor="#512BD4"
-                TextColor="White" />
+            Text="Lisa testtoit"
+            Command="{Binding AddTestDishCommand}"
+            IsVisible="{Binding Session.IsAdmin}"
+            BackgroundColor="#512BD4"
+            TextColor="White" />
 
     </Grid>
 </ContentPage>

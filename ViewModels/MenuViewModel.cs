@@ -9,9 +9,11 @@ namespace Arvestus_project_TARpv24.ViewModels
     public class MenuViewModel : BaseViewModel
     {
         private readonly DatabaseService _databaseService;
+        private readonly SessionService _sessionService;
         private List<Dish> _allDishes = new List<Dish>();
         private string _searchText;
 
+        public SessionService Session => _sessionService;
         public ObservableCollection<Dish> Dishes { get; set; } = new ObservableCollection<Dish>();
 
         public string SearchText
@@ -28,9 +30,10 @@ namespace Arvestus_project_TARpv24.ViewModels
         public ICommand AddTestDishCommand { get; }
         public ICommand SelectDishCommand { get; }
 
-        public MenuViewModel(DatabaseService databaseService)
+        public MenuViewModel(DatabaseService databaseService, SessionService sessionService)
         {
             _databaseService = databaseService;
+            _sessionService = sessionService;
 
             LoadDishesCommand = new Command(async () => await LoadDishesAsync());
             AddTestDishCommand = new Command(async () => await AddTestDishAsync());
