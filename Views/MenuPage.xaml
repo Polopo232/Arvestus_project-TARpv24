@@ -56,8 +56,8 @@
         </CollectionView>
 
         <Button Grid.Row="2"
-            Text="Lisa testtoit"
-            Command="{Binding AddTestDishCommand}"
+            Text="Lisa uus toit"
+            Command="{Binding AddDishCommand}"
             IsVisible="{Binding Session.IsAdmin}"
             BackgroundColor="#512BD4"
             TextColor="White" />

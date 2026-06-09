@@ -10,6 +10,7 @@ namespace Arvestus_project_TARpv24.ViewModels
     {
         private readonly DatabaseService _databaseService;
         private readonly SessionService _sessionService;
+        private readonly IServiceProvider _serviceProvider;
         private List<Dish> _allDishes = new List<Dish>();
         private string _searchText;
 
@@ -27,22 +28,21 @@ namespace Arvestus_project_TARpv24.ViewModels
         }
 
         public ICommand LoadDishesCommand { get; }
-        public ICommand AddTestDishCommand { get; }
+        public ICommand AddDishCommand { get; }
         public ICommand SelectDishCommand { get; }
 
-        public MenuViewModel(DatabaseService databaseService, SessionService sessionService)
+        public MenuViewModel(DatabaseService databaseService, SessionService sessionService, IServiceProvider serviceProvider)
         {
             _databaseService = databaseService;
             _sessionService = sessionService;
+            _serviceProvider = serviceProvider;
 
             LoadDishesCommand = new Command(async () => await LoadDishesAsync());
-            AddTestDishCommand = new Command(async () => await AddTestDishAsync());
+            AddDishCommand = new Command(async () => await NavigateToAddDishAsync());
             SelectDishCommand = new Command<Dish>(async (dish) => await OpenDishDetailAsync(dish));
-
-            _ = LoadDishesAsync();
         }
 
-        private async Task LoadDishesAsync()
+        public async Task LoadDishesAsync()
         {
             try
             {
@@ -75,28 +75,10 @@ namespace Arvestus_project_TARpv24.ViewModels
             });
         }
 
-        private async Task AddTestDishAsync()
+        private async Task NavigateToAddDishAsync()
         {
-            try
-            {
-                var newDish = new Dish
-                {
-                    Name = "Päevasupp (Tomati)",
-                    Description = "Maitsev kodune supp koore ja saiakuubikutega.",
-                    Category = "Supid",
-                    Allergens = "Laktoos, Gluteen"
-                };
-
-                await _databaseService.SaveDishAsync(newDish);
-                await LoadDishesAsync();
-            }
-            catch (Exception ex)
-            {
-                MainThread.BeginInvokeOnMainThread(async () =>
-                {
-                    await Shell.Current.DisplayAlert("Viga lisamisel", ex.Message, "OK");
-                });
-            }
+            var addDishPage = _serviceProvider.GetRequiredService<AddDishPage>();
+            await Shell.Current.Navigation.PushAsync(addDishPage);
         }
 
         private async Task OpenDishDetailAsync(Dish dish)
