@@ -20,6 +20,7 @@ namespace Arvestus_project_TARpv24.Services
             _database = new SQLiteAsyncConnection(_dbPath);
             await _database.CreateTableAsync<Dish>();
             await _database.CreateTableAsync<Rating>();
+            await _database.CreateTableAsync<DailyMenu>();
         }
 
         public async Task<List<Dish>> GetDishesAsync()
@@ -51,6 +52,28 @@ namespace Arvestus_project_TARpv24.Services
         {
             await InitializeAsync();
             return await _database.InsertAsync(rating);
+        }
+
+        public async Task<List<Dish>> GetDailyMenuDishesAsync(DateTime date)
+        {
+            await InitializeAsync();
+            var startOfDay = date.Date;
+            var endOfDay = startOfDay.AddDays(1);
+
+            var dailyEntries = await _database.Table<DailyMenu>()
+                .Where(dm => dm.Date >= startOfDay && dm.Date < endOfDay)
+                .ToListAsync();
+
+            var dishIds = dailyEntries.Select(e => e.DishId).ToList();
+
+            var allDishes = await GetDishesAsync();
+            return allDishes.Where(d => dishIds.Contains(d.Id)).ToList();
+        }
+
+        public async Task<int> SaveDailyMenuAsync(DailyMenu dailyMenu)
+        {
+            await InitializeAsync();
+            return await _database.InsertAsync(dailyMenu);
         }
     }
 }
