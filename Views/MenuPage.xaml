@@ -7,7 +7,7 @@
              x:DataType="vm:MenuViewModel"
              Title="Lunchbox Menüü">
 
-    <Grid RowDefinitions="Auto, *, Auto" Padding="20" Spacing="10">
+    <Grid RowDefinitions="Auto, *, Auto" Padding="20" RowSpacing="10">
 
         <SearchBar Grid.Row="0" 
                    Placeholder="Otsi toitu või kategooriat..." 
