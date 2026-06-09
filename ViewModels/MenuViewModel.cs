@@ -102,7 +102,7 @@ namespace Arvestus_project_TARpv24.ViewModels
         private async Task OpenDishDetailAsync(Dish dish)
         {
             if (dish == null) return;
-            await Shell.Current.Navigation.PushAsync(new DishDetailPage(dish, _databaseService));
+            await Shell.Current.Navigation.PushAsync(new DishDetailPage(dish, _databaseService, _sessionService));
         }
     }
 }

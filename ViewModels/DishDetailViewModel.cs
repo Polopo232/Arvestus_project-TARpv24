@@ -8,16 +8,15 @@ namespace Arvestus_project_TARpv24.ViewModels
     public class DishDetailViewModel : BaseViewModel
     {
         private readonly DatabaseService _databaseService;
-        private string _newComment;
+        private readonly SessionService _sessionService;
+        private Dish _dish;
         private int _newScore = 5;
+        private string _newComment;
 
-        public Dish SelectedDish { get; }
-        public ObservableCollection<Rating> Ratings { get; set; } = new ObservableCollection<Rating>();
-
-        public string NewComment
+        public Dish Dish
         {
-            get => _newComment;
-            set => SetProperty(ref _newComment, value);
+            get => _dish;
+            set => SetProperty(ref _dish, value);
         }
 
         public int NewScore
@@ -26,15 +25,23 @@ namespace Arvestus_project_TARpv24.ViewModels
             set => SetProperty(ref _newScore, value);
         }
 
-        public ICommand LoadRatingsCommand { get; }
+        public string NewComment
+        {
+            get => _newComment;
+            set => SetProperty(ref _newComment, value);
+        }
+
+        public SessionService Session => _sessionService;
+        public ObservableCollection<Rating> Ratings { get; set; } = new ObservableCollection<Rating>();
+
         public ICommand AddRatingCommand { get; }
 
-        public DishDetailViewModel(Dish dish, DatabaseService databaseService)
+        public DishDetailViewModel(Dish dish, DatabaseService databaseService, SessionService sessionService)
         {
-            SelectedDish = dish;
+            _dish = dish;
             _databaseService = databaseService;
+            _sessionService = sessionService;
 
-            LoadRatingsCommand = new Command(async () => await LoadRatingsAsync());
             AddRatingCommand = new Command(async () => await AddRatingAsync());
 
             _ = LoadRatingsAsync();
@@ -44,7 +51,7 @@ namespace Arvestus_project_TARpv24.ViewModels
         {
             try
             {
-                var list = await _databaseService.GetRatingsForDishAsync(SelectedDish.Id);
+                var list = await _databaseService.GetRatingsForDishAsync(_dish.Id);
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     Ratings.Clear();
@@ -62,13 +69,17 @@ namespace Arvestus_project_TARpv24.ViewModels
 
         private async Task AddRatingAsync()
         {
-            if (string.IsNullOrWhiteSpace(NewComment)) return;
+            if (NewScore < 1 || NewScore > 5)
+            {
+                await Shell.Current.DisplayAlert("Viga", "Hinnang peab olema vahemikus 1 kuni 5", "OK");
+                return;
+            }
 
             try
             {
                 var rating = new Rating
                 {
-                    DishId = SelectedDish.Id,
+                    DishId = _dish.Id,
                     Score = NewScore,
                     Comment = NewComment
                 };
