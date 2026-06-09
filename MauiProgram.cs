@@ -34,6 +34,8 @@ namespace Arvestus_project_TARpv24
             builder.Services.AddSingleton<ProfileViewModel>();
             builder.Services.AddSingleton<ProfilePage>();
             builder.Services.AddSingleton<SessionService>();
+            builder.Services.AddTransient<AddDishViewModel>();
+            builder.Services.AddTransient<AddDishPage>();
 
             return builder.Build();
         }
