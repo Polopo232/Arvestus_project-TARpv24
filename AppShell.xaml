@@ -13,6 +13,11 @@
             <ShellContent ContentTemplate="{DataTemplate views:DailyMenuPage}" 
                           Route="DailyMenuPage" />
         </Tab>
+
+        <Tab Title="Profiil">
+            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" 
+                          Route="ProfilePage" />
+        </Tab>
     </TabBar>
 
 </Shell>
