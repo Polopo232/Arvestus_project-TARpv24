@@ -11,9 +11,11 @@ namespace Arvestus_project_TARpv24.ViewModels
         private readonly DatabaseService _databaseService;
         private readonly SessionService _sessionService;
         private DateTime _selectedDate = DateTime.Today;
+        private Dish _selectedDish;
 
         public SessionService Session => _sessionService;
         public ObservableCollection<Dish> DailyDishes { get; set; } = new ObservableCollection<Dish>();
+        public ObservableCollection<Dish> AllDishes { get; set; } = new ObservableCollection<Dish>();
 
         public DateTime SelectedDate
         {
@@ -25,9 +27,15 @@ namespace Arvestus_project_TARpv24.ViewModels
             }
         }
 
+        public Dish SelectedDish
+        {
+            get => _selectedDish;
+            set => SetProperty(ref _selectedDish, value);
+        }
+
         public ICommand LoadDailyMenuCommand { get; }
         public ICommand SelectDishCommand { get; }
-        public ICommand AddCurrentDishToDailyCommand { get; }
+        public ICommand AddSelectedDishToDailyCommand { get; }
 
         public DailyMenuViewModel(DatabaseService databaseService, SessionService sessionService)
         {
@@ -36,9 +44,10 @@ namespace Arvestus_project_TARpv24.ViewModels
 
             LoadDailyMenuCommand = new Command(async () => await LoadDailyMenuAsync());
             SelectDishCommand = new Command<Dish>(async (dish) => await OpenDishDetailAsync(dish));
-            AddCurrentDishToDailyCommand = new Command(async () => await AddCurrentDishToDailyAsync());
+            AddSelectedDishToDailyCommand = new Command(async () => await AddSelectedDishToDailyAsync());
 
             _ = LoadDailyMenuAsync();
+            _ = LoadAllDishesAsync();
         }
 
         public async Task LoadDailyMenuAsync()
@@ -61,22 +70,44 @@ namespace Arvestus_project_TARpv24.ViewModels
             }
         }
 
-        private async Task AddCurrentDishToDailyAsync()
+        public async Task LoadAllDishesAsync()
         {
             try
             {
-                var allDishes = await _databaseService.GetDishesAsync();
-                if (allDishes.Any())
+                var list = await _databaseService.GetDishesAsync();
+                MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    var firstDish = allDishes.First();
-                    var newDaily = new DailyMenu
+                    AllDishes.Clear();
+                    foreach (var dish in list)
                     {
-                        DishId = firstDish.Id,
-                        Date = SelectedDate
-                    };
-                    await _databaseService.SaveDailyMenuAsync(newDaily);
-                    await LoadDailyMenuAsync();
-                }
+                        AllDishes.Add(dish);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private async Task AddSelectedDishToDailyAsync()
+        {
+            if (SelectedDish == null)
+            {
+                await Shell.Current.DisplayAlert("Viga", "Palun valige toit nimekirjast", "OK");
+                return;
+            }
+
+            try
+            {
+                var newDaily = new DailyMenu
+                {
+                    DishId = SelectedDish.Id,
+                    Date = SelectedDate
+                };
+                await _databaseService.SaveDailyMenuAsync(newDaily);
+                SelectedDish = null;
+                await LoadDailyMenuAsync();
             }
             catch (Exception ex)
             {
