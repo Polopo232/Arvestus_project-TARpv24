@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Arvestus_project_TARpv24.ViewModels"
+             x:Class="Arvestus_project_TARpv24.Views.ProfilePage"
+             x:DataType="vm:ProfileViewModel"
+             Title="Kasutaja Profiil">
+
+    <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="Center">
+
+        <Border StrokeShape="RoundRectangle 10" Padding="15" BackgroundColor="#F5F5F5">
+            <Label Text="{Binding CurrentStatus}" 
+                   FontSize="18" 
+                   HorizontalOptions="Center" 
+                   FontAttributes="Bold"/>
+        </Border>
+
+        <VerticalStackLayout Spacing="10" IsVisible="{Binding Session.IsLoggedOut}">
+            <Entry Placeholder="Kasutajanimi" Text="{Binding Username}" />
+            <Entry Placeholder="Parool" IsPassword="True" Text="{Binding Password}" />
+
+            <Button Text="Logi sisse" 
+                    Command="{Binding LoginCommand}" 
+                    BackgroundColor="#512BD4" 
+                    TextColor="White" />
+
+            <Button Text="Registreeru" 
+                    Command="{Binding RegisterCommand}" 
+                    BackgroundColor="Gray" 
+                    TextColor="White" />
+        </VerticalStackLayout>
+
+        <Button Text="Logi välja" 
+                Command="{Binding LogoutCommand}" 
+                IsVisible="{Binding Session.IsLoggedIn}" 
+                BackgroundColor="Red" 
+                TextColor="White" />
+
+    </VerticalStackLayout>
+</ContentPage>
