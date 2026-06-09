@@ -2,7 +2,7 @@
 
 namespace Arvestus_project_TARpv24.Models
 {
-    [SQLite.Table("Dishes")] 
+    [SQLite.Table("Dishes")]
     public class Dish
     {
         [PrimaryKey, AutoIncrement]
@@ -20,5 +20,11 @@ namespace Arvestus_project_TARpv24.Models
         public string Category { get; set; }
 
         public string ImagePath { get; set; }
+
+        [Ignore]
+        public double AverageRating { get; set; }
+
+        [Ignore]
+        public int RatingCount { get; set; }
     }
 }

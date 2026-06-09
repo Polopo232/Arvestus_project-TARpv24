@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Arvestus_project_TARpv24.Models;
 using Arvestus_project_TARpv24.Services;
@@ -10,8 +10,11 @@ namespace Arvestus_project_TARpv24.ViewModels
     {
         private readonly DatabaseService _databaseService;
         private readonly SessionService _sessionService;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly SoundService _soundService;
         private DateTime _selectedDate = DateTime.Today;
         private Dish _selectedDish;
+        private bool _isSelectionMode;
 
         public SessionService Session => _sessionService;
         public ObservableCollection<Dish> DailyDishes { get; set; } = new ObservableCollection<Dish>();
@@ -33,18 +36,30 @@ namespace Arvestus_project_TARpv24.ViewModels
             set => SetProperty(ref _selectedDish, value);
         }
 
+        public bool IsSelectionMode
+        {
+            get => _isSelectionMode;
+            set => SetProperty(ref _isSelectionMode, value);
+        }
+
         public ICommand LoadDailyMenuCommand { get; }
         public ICommand SelectDishCommand { get; }
         public ICommand AddSelectedDishToDailyCommand { get; }
+        public ICommand RemoveFromDailyCommand { get; }
+        public ICommand ToggleSelectionModeCommand { get; }
 
-        public DailyMenuViewModel(DatabaseService databaseService, SessionService sessionService)
+        public DailyMenuViewModel(DatabaseService databaseService, SessionService sessionService, IServiceProvider serviceProvider, SoundService soundService)
         {
             _databaseService = databaseService;
             _sessionService = sessionService;
+            _serviceProvider = serviceProvider;
+            _soundService = soundService;
 
             LoadDailyMenuCommand = new Command(async () => await LoadDailyMenuAsync());
             SelectDishCommand = new Command<Dish>(async (dish) => await OpenDishDetailAsync(dish));
             AddSelectedDishToDailyCommand = new Command(async () => await AddSelectedDishToDailyAsync());
+            RemoveFromDailyCommand = new Command<Dish>(async (dish) => await RemoveDishFromDailyAsync(dish));
+            ToggleSelectionModeCommand = new Command(() => IsSelectionMode = !IsSelectionMode);
 
             _ = LoadDailyMenuAsync();
             _ = LoadAllDishesAsync();
@@ -106,7 +121,23 @@ namespace Arvestus_project_TARpv24.ViewModels
                     Date = SelectedDate
                 };
                 await _databaseService.SaveDailyMenuAsync(newDaily);
+                await _soundService.PlaySuccessSoundAsync();
                 SelectedDish = null;
+                await LoadDailyMenuAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private async Task RemoveDishFromDailyAsync(Dish dish)
+        {
+            if (dish == null) return;
+            try
+            {
+                await _databaseService.DeleteDailyMenuAsync(dish.Id, SelectedDate);
+                await _soundService.PlayClickSoundAsync();
                 await LoadDailyMenuAsync();
             }
             catch (Exception ex)
@@ -118,7 +149,11 @@ namespace Arvestus_project_TARpv24.ViewModels
         private async Task OpenDishDetailAsync(Dish dish)
         {
             if (dish == null) return;
-            await Shell.Current.Navigation.PushAsync(new DishDetailPage(dish, _databaseService, _sessionService));
+            await _soundService.PlayClickSoundAsync();
+            var viewModel = _serviceProvider.GetRequiredService<DishDetailViewModel>();
+            await viewModel.InitializeAsync(dish);
+            var page = _serviceProvider.GetRequiredService<DishDetailPage>();
+            await Shell.Current.Navigation.PushAsync(page);
         }
     }
 }

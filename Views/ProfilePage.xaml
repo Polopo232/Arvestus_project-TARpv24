@@ -8,26 +8,28 @@
 
     <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="Center">
 
-        <Border StrokeShape="RoundRectangle 10" Padding="15" BackgroundColor="#F5F5F5">
-            <Label Text="{Binding CurrentStatus}" 
-                   FontSize="18" 
-                   HorizontalOptions="Center" 
-                   FontAttributes="Bold"/>
+        <Border StrokeShape="RoundRectangle 10" Padding="15"
+                BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}">
+            <Label Text="{Binding CurrentStatus}"
+                   FontSize="18"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
         </Border>
 
         <VerticalStackLayout Spacing="10" IsVisible="{Binding Session.IsLoggedOut}">
             <Entry Placeholder="Kasutajanimi" Text="{Binding Username}" />
             <Entry Placeholder="Parool" IsPassword="True" Text="{Binding Password}" />
 
-            <Button Text="Logi sisse" 
-                    Command="{Binding LoginCommand}" 
-                    BackgroundColor="#512BD4" 
-                    TextColor="White" />
+            <Button Text="Logi sisse"
+                    Command="{Binding LoginCommand}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
 
-            <Button Text="Registreeru" 
-                    Command="{Binding RegisterCommand}" 
-                    BackgroundColor="Gray" 
-                    TextColor="White" />
+            <Button Text="Registreeru"
+                    Command="{Binding RegisterCommand}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray600}}"
+                    TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray200}}" />
         </VerticalStackLayout>
 
         <Button Text="Logi välja" 

@@ -5,15 +5,15 @@
              xmlns:models="clr-namespace:Arvestus_project_TARpv24.Models"
              x:Class="Arvestus_project_TARpv24.Views.MenuPage"
              x:DataType="vm:MenuViewModel"
-             Title="Lunchbox Menüü">
+             Title="Menüü">
 
     <Grid RowDefinitions="Auto, *, Auto" Padding="20" RowSpacing="10">
 
-        <SearchBar Grid.Row="0" 
-                   Placeholder="Otsi toitu või kategooriat..." 
+        <SearchBar Grid.Row="0"
+                   Placeholder="Otsi toitu voi kategooriat..."
                    Text="{Binding SearchText}" />
 
-        <CollectionView Grid.Row="1" 
+        <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Dishes}"
                         EmptyView="Toite ei leitud.">
             <CollectionView.ItemsLayout>
@@ -24,30 +24,40 @@
                 <DataTemplate x:DataType="models:Dish">
                     <Border StrokeShape="RoundRectangle 10"
                             StrokeThickness="1"
-                            Stroke="#E0E0E0"
+                            Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
                             Padding="15">
                         <Border.GestureRecognizers>
-                            <TapGestureRecognizer 
+                            <TapGestureRecognizer
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MenuViewModel}}, Path=SelectDishCommand}"
                                 CommandParameter="{Binding .}" />
                         </Border.GestureRecognizers>
 
                         <VerticalStackLayout Spacing="5">
-                            <Label Text="{Binding Name}" 
-                                   FontSize="18" 
-                                   FontAttributes="Bold" />
+                            <HorizontalStackLayout Spacing="10">
+                                <Label Text="{Binding Name}"
+                                       FontSize="18"
+                                       FontAttributes="Bold" />
+                                <Label Text="{Binding AverageRating, StringFormat='⭐ {0:F1} ({1})'}"
+                                       FontSize="14"
+                                       TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"
+                                       IsVisible="{Binding RatingCount, Converter={StaticResource GreaterThanZeroConverter}}"
+                                       VerticalOptions="Center" />
+                            </HorizontalStackLayout>
 
-                            <Label Text="{Binding Category}" 
-                                   FontSize="12" 
+                            <Label Text="{Binding Category}"
+                                   FontSize="12"
                                    FontAttributes="Italic"
-                                   TextColor="Gray" />
+                                   TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
 
-                            <Label Text="{Binding Description}" 
+                            <Label Text="{Binding Description}"
                                    FontSize="14" />
 
                             <HorizontalStackLayout Spacing="5" Margin="0,5,0,0">
-                                <Label Text="Allergeenid:" FontSize="12" FontAttributes="Bold" TextColor="Red" />
-                                <Label Text="{Binding Allergens}" FontSize="12" TextColor="Red" />
+                                <Label Text="Allergeenid:" FontSize="12" FontAttributes="Bold"
+                                       TextColor="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
+                                <Label Text="{Binding Allergens}" FontSize="12"
+                                       TextColor="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Border>
@@ -59,8 +69,8 @@
             Text="Lisa uus toit"
             Command="{Binding AddDishCommand}"
             IsVisible="{Binding Session.IsAdmin}"
-            BackgroundColor="#512BD4"
-            TextColor="White" />
+            BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+            TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
 
     </Grid>
 </ContentPage>

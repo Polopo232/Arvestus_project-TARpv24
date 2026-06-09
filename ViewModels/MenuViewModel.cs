@@ -11,6 +11,7 @@ namespace Arvestus_project_TARpv24.ViewModels
         private readonly DatabaseService _databaseService;
         private readonly SessionService _sessionService;
         private readonly IServiceProvider _serviceProvider;
+        private readonly SoundService _soundService;
         private List<Dish> _allDishes = new List<Dish>();
         private string _searchText;
 
@@ -31,11 +32,12 @@ namespace Arvestus_project_TARpv24.ViewModels
         public ICommand AddDishCommand { get; }
         public ICommand SelectDishCommand { get; }
 
-        public MenuViewModel(DatabaseService databaseService, SessionService sessionService, IServiceProvider serviceProvider)
+        public MenuViewModel(DatabaseService databaseService, SessionService sessionService, IServiceProvider serviceProvider, SoundService soundService)
         {
             _databaseService = databaseService;
             _sessionService = sessionService;
             _serviceProvider = serviceProvider;
+            _soundService = soundService;
 
             LoadDishesCommand = new Command(async () => await LoadDishesAsync());
             AddDishCommand = new Command(async () => await NavigateToAddDishAsync());
@@ -84,7 +86,11 @@ namespace Arvestus_project_TARpv24.ViewModels
         private async Task OpenDishDetailAsync(Dish dish)
         {
             if (dish == null) return;
-            await Shell.Current.Navigation.PushAsync(new DishDetailPage(dish, _databaseService, _sessionService));
+            await _soundService.PlayClickSoundAsync();
+            var viewModel = _serviceProvider.GetRequiredService<DishDetailViewModel>();
+            await viewModel.InitializeAsync(dish);
+            var page = _serviceProvider.GetRequiredService<DishDetailPage>();
+            await Shell.Current.Navigation.PushAsync(page);
         }
     }
 }

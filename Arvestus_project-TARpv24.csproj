@@ -64,6 +64,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Update="Resources\Localization\AppResources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Resources\Localization\AppResources.en.resx">
+			<DependentUpon>AppResources.resx</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Resources\Localization\AppResources.ru.resx">
+			<DependentUpon>AppResources.resx</DependentUpon>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Compile Update="Views\DishDetailPage.xaml.cs">
 	    <DependentUpon>DishDetailPage.xaml</DependentUpon>
 	  </Compile>

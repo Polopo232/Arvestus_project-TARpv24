@@ -16,10 +16,10 @@
             <Editor Placeholder="Kirjeldus..." HeightRequest="100" Text="{Binding Description}" />
             <Entry Placeholder="Allergeenid (nt. Laktoos, Gluteen)" Text="{Binding Allergens}" />
 
-            <Button Text="Salvesta toit" 
-                    Command="{Binding SaveDishCommand}" 
-                    BackgroundColor="#512BD4" 
-                    TextColor="White" 
+            <Button Text="Salvesta toit"
+                    Command="{Binding SaveDishCommand}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}"
                     Margin="0,10,0,0" />
 
         </VerticalStackLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Arvestus_project_TARpv24.ViewModels"
+             x:Class="Arvestus_project_TARpv24.Views.SettingsPage"
+             x:DataType="vm:SettingsViewModel"
+             Title="Seaded">
+
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="25">
+
+            <!-- Theme Section -->
+            <Border StrokeShape="RoundRectangle 10" Padding="15"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Teema"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+
+                    <RadioButton Content="Süsteemi järgi"
+                                 IsChecked="{Binding IsFollowSystem}"
+                                 GroupName="ThemeGroup" />
+                    <RadioButton Content="Hele teema"
+                                 IsChecked="{Binding IsLightTheme}"
+                                 GroupName="ThemeGroup" />
+                    <RadioButton Content="Tume teema"
+                                 IsChecked="{Binding IsDarkTheme}"
+                                 GroupName="ThemeGroup" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Language Section -->
+            <Border StrokeShape="RoundRectangle 10" Padding="15"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Keele valik"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+
+                    <RadioButton Content="Eesti"
+                                 IsChecked="{Binding IsEstonian}"
+                                 GroupName="LanguageGroup" />
+                    <RadioButton Content="English"
+                                 IsChecked="{Binding IsEnglish}"
+                                 GroupName="LanguageGroup" />
+                    <RadioButton Content="Русский"
+                                 IsChecked="{Binding IsRussian}"
+                                 GroupName="LanguageGroup" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Sound Section -->
+            <Border StrokeShape="RoundRectangle 10" Padding="15"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Helid"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Helid sisse lülitatud" VerticalOptions="Center" />
+                        <Switch IsToggled="{Binding SoundEnabled}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Font Size Section -->
+            <Border StrokeShape="RoundRectangle 10" Padding="15"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Kirja suurus"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+
+                    <Slider Minimum="12" Maximum="24" Value="{Binding FontSize}"
+                            MinimumTrackColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}"
+                            MaximumTrackColor="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+
+                    <Label Text="{Binding FontSize, StringFormat='Suurus: {0:F0}'}"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

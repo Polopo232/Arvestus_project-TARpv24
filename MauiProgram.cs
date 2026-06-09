@@ -1,4 +1,4 @@
-﻿using Arvestus_project_TARpv24.Services;
+using Arvestus_project_TARpv24.Services;
 using Arvestus_project_TARpv24.ViewModels;
 using Arvestus_project_TARpv24.Views;
 using Microsoft.Extensions.Logging;
@@ -24,18 +24,28 @@ namespace Arvestus_project_TARpv24
 
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "lunchbox.db3");
 
+            // Services
             builder.Services.AddSingleton<DatabaseService>(s =>
                 ActivatorUtilities.CreateInstance<DatabaseService>(s, dbPath));
+            builder.Services.AddSingleton<SettingsService>();
+            builder.Services.AddSingleton<ThemeService>();
+            builder.Services.AddSingleton<SoundService>();
+            builder.Services.AddSingleton<LocalizationService>();
+            builder.Services.AddSingleton<SessionService>();
 
+            // ViewModels + Pages
             builder.Services.AddSingleton<MenuViewModel>();
             builder.Services.AddSingleton<MenuPage>();
             builder.Services.AddSingleton<DailyMenuViewModel>();
             builder.Services.AddSingleton<DailyMenuPage>();
             builder.Services.AddSingleton<ProfileViewModel>();
             builder.Services.AddSingleton<ProfilePage>();
-            builder.Services.AddSingleton<SessionService>();
+            builder.Services.AddSingleton<SettingsViewModel>();
+            builder.Services.AddSingleton<SettingsPage>();
             builder.Services.AddTransient<AddDishViewModel>();
             builder.Services.AddTransient<AddDishPage>();
+            builder.Services.AddTransient<DishDetailViewModel>();
+            builder.Services.AddTransient<DishDetailPage>();
 
             return builder.Build();
         }

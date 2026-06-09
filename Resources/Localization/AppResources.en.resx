@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppName" xml:space="preserve">
+    <value>Lunchbox</value>
+  </data>
+  <data name="MenuTab" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="DailyMenuTab" xml:space="preserve">
+    <value>Daily Menu</value>
+  </data>
+  <data name="ProfileTab" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="SettingsTab" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Search for food or category...</value>
+  </data>
+  <data name="NoDishesFound" xml:space="preserve">
+    <value>No dishes found.</value>
+  </data>
+  <data name="AddDish" xml:space="preserve">
+    <value>Add new dish</value>
+  </data>
+  <data name="Allergens" xml:space="preserve">
+    <value>Allergens:</value>
+  </data>
+  <data name="RatingLabel" xml:space="preserve">
+    <value>Ratings and feedback</value>
+  </data>
+  <data name="NoRatings" xml:space="preserve">
+    <value>This dish has no ratings yet.</value>
+  </data>
+  <data name="AddRating" xml:space="preserve">
+    <value>Add your rating</value>
+  </data>
+  <data name="RateLabel" xml:space="preserve">
+    <value>Score (1-5):</value>
+  </data>
+  <data name="CommentPlaceholder" xml:space="preserve">
+    <value>Your comment...</value>
+  </data>
+  <data name="SaveRating" xml:space="preserve">
+    <value>Save rating</value>
+  </data>
+  <data name="LoginRequiredRating" xml:space="preserve">
+    <value>You must log in to leave a rating.</value>
+  </data>
+  <data name="DishDetailTitle" xml:space="preserve">
+    <value>Dish Details</value>
+  </data>
+  <data name="ProfileTitle" xml:space="preserve">
+    <value>User Profile</value>
+  </data>
+  <data name="AddDishTitle" xml:space="preserve">
+    <value>Add new dish</value>
+  </data>
+  <data name="DailyMenuTitle" xml:space="preserve">
+    <value>Daily Menu</value>
+  </data>
+  <data name="NoDailyMenu" xml:space="preserve">
+    <value>No menu has been created for the selected date.</value>
+  </data>
+  <data name="AddFirstDishToday" xml:space="preserve">
+    <value>Add selected dish to today's menu</value>
+  </data>
+  <data name="UsernamePlaceholder" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="PasswordPlaceholder" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="GuestStatus" xml:space="preserve">
+    <value>You are logged in as Guest</value>
+  </data>
+  <data name="UserStatus" xml:space="preserve">
+    <value>User: {0} ({1})</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="OkButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="FillAllFields" xml:space="preserve">
+    <value>Please fill in all fields</value>
+  </data>
+  <data name="WrongCredentials" xml:space="preserve">
+    <value>Wrong username or password</value>
+  </data>
+  <data name="UserRegistered" xml:space="preserve">
+    <value>User has been successfully registered</value>
+  </data>
+  <data name="UsernameTaken" xml:space="preserve">
+    <value>This username is already taken</value>
+  </data>
+  <data name="FillNameCategory" xml:space="preserve">
+    <value>Name and Category are required fields</value>
+  </data>
+  <data name="DishSaved" xml:space="preserve">
+    <value>The dish has been successfully added to the menu</value>
+  </data>
+  <data name="DishTitle" xml:space="preserve">
+    <value>Dish details</value>
+  </data>
+  <data name="DishNamePlaceholder" xml:space="preserve">
+    <value>Dish name (e.g. Borscht)</value>
+  </data>
+  <data name="CategoryPlaceholder" xml:space="preserve">
+    <value>Category (e.g. Soups, Mains)</value>
+  </data>
+  <data name="DescriptionPlaceholder" xml:space="preserve">
+    <value>Description...</value>
+  </data>
+  <data name="AllergensPlaceholder" xml:space="preserve">
+    <value>Allergens (e.g. Lactose, Gluten)</value>
+  </data>
+  <data name="SaveDish" xml:space="preserve">
+    <value>Save dish</value>
+  </data>
+  <data name="RatingOutOfRange" xml:space="preserve">
+    <value>Rating must be between 1 and 5</value>
+  </data>
+  <data name="SelectDishFirst" xml:space="preserve">
+    <value>Please select a dish from the list</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="ThemeTitle" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="LanguageTitle" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="SoundEnabled" xml:space="preserve">
+    <value>Sound enabled</value>
+  </data>
+  <data name="FontSizeLabel" xml:space="preserve">
+    <value>Font size</value>
+  </data>
+  <data name="FollowSystem" xml:space="preserve">
+    <value>Follow system</value>
+  </data>
+  <data name="LightTheme" xml:space="preserve">
+    <value>Light theme</value>
+  </data>
+  <data name="DarkTheme" xml:space="preserve">
+    <value>Dark theme</value>
+  </data>
+  <data name="Estonian" xml:space="preserve">
+    <value>Eesti</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="RemoveFromDaily" xml:space="preserve">
+    <value>Remove from daily menu</value>
+  </data>
+  <data name="DishRemoved" xml:space="preserve">
+    <value>The dish has been removed from the daily menu</value>
+  </data>
+  <data name="DishAddedToDaily" xml:space="preserve">
+    <value>The dish has been added to the daily menu</value>
+  </data>
+</root>

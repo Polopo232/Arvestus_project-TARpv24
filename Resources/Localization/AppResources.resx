@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppName" xml:space="preserve">
+    <value>Lunchbox</value>
+  </data>
+  <data name="MenuTab" xml:space="preserve">
+    <value>Menüü</value>
+  </data>
+  <data name="DailyMenuTab" xml:space="preserve">
+    <value>Päevamenüü</value>
+  </data>
+  <data name="ProfileTab" xml:space="preserve">
+    <value>Profiil</value>
+  </data>
+  <data name="SettingsTab" xml:space="preserve">
+    <value>Seaded</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Otsi toitu või kategooriat...</value>
+  </data>
+  <data name="NoDishesFound" xml:space="preserve">
+    <value>Toite ei leitud.</value>
+  </data>
+  <data name="AddDish" xml:space="preserve">
+    <value>Lisa uus toit</value>
+  </data>
+  <data name="Allergens" xml:space="preserve">
+    <value>Allergeenid:</value>
+  </data>
+  <data name="RatingLabel" xml:space="preserve">
+    <value>Hinnangud ja tagasiside</value>
+  </data>
+  <data name="NoRatings" xml:space="preserve">
+    <value>Sellel toidul puuduvad hinnangud.</value>
+  </data>
+  <data name="AddRating" xml:space="preserve">
+    <value>Lisa oma hinnang</value>
+  </data>
+  <data name="RateLabel" xml:space="preserve">
+    <value>Hinne (1-5):</value>
+  </data>
+  <data name="CommentPlaceholder" xml:space="preserve">
+    <value>Sinu kommentaar...</value>
+  </data>
+  <data name="SaveRating" xml:space="preserve">
+    <value>Salvesta hinnang</value>
+  </data>
+  <data name="LoginRequiredRating" xml:space="preserve">
+    <value>Hinnangu jätmiseks peate sisse logima.</value>
+  </data>
+  <data name="DishDetailTitle" xml:space="preserve">
+    <value>Toidu Andmed</value>
+  </data>
+  <data name="ProfileTitle" xml:space="preserve">
+    <value>Kasutaja Profiil</value>
+  </data>
+  <data name="AddDishTitle" xml:space="preserve">
+    <value>Uue toidu lisamine</value>
+  </data>
+  <data name="DailyMenuTitle" xml:space="preserve">
+    <value>Päevamenüü</value>
+  </data>
+  <data name="NoDailyMenu" xml:space="preserve">
+    <value>Valitud kuupäevaks ei ole menüüd koostatud.</value>
+  </data>
+  <data name="AddFirstDishToday" xml:space="preserve">
+    <value>Määra esimene toit tänaseks</value>
+  </data>
+  <data name="UsernamePlaceholder" xml:space="preserve">
+    <value>Kasutajanimi</value>
+  </data>
+  <data name="PasswordPlaceholder" xml:space="preserve">
+    <value>Parool</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Logi sisse</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registreeru</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logi välja</value>
+  </data>
+  <data name="GuestStatus" xml:space="preserve">
+    <value>Olete sisse loginud kui Külaline</value>
+  </data>
+  <data name="UserStatus" xml:space="preserve">
+    <value>Kasutaja: {0} ({1})</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Viga</value>
+  </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>Edu</value>
+  </data>
+  <data name="OkButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="FillAllFields" xml:space="preserve">
+    <value>Palun täitke kõik väljad</value>
+  </data>
+  <data name="WrongCredentials" xml:space="preserve">
+    <value>Vale kasutajanimi või parool</value>
+  </data>
+  <data name="UserRegistered" xml:space="preserve">
+    <value>Kasutaja on edukalt registreeritud</value>
+  </data>
+  <data name="UsernameTaken" xml:space="preserve">
+    <value>See kasutajanimi on juba võetud</value>
+  </data>
+  <data name="FillNameCategory" xml:space="preserve">
+    <value>Nimi ja Kategooria on kohustuslikud väljad</value>
+  </data>
+  <data name="DishSaved" xml:space="preserve">
+    <value>Toit on edukalt lisatud menüüsse</value>
+  </data>
+  <data name="DishTitle" xml:space="preserve">
+    <value>Toidu andmed</value>
+  </data>
+  <data name="DishNamePlaceholder" xml:space="preserve">
+    <value>Toidu nimetus (nt. Seljanka)</value>
+  </data>
+  <data name="CategoryPlaceholder" xml:space="preserve">
+    <value>Kategooria (nt. Supid, Praed)</value>
+  </data>
+  <data name="DescriptionPlaceholder" xml:space="preserve">
+    <value>Kirjeldus...</value>
+  </data>
+  <data name="AllergensPlaceholder" xml:space="preserve">
+    <value>Allergeenid (nt. Laktoos, Gluteen)</value>
+  </data>
+  <data name="SaveDish" xml:space="preserve">
+    <value>Salvesta toit</value>
+  </data>
+  <data name="RatingOutOfRange" xml:space="preserve">
+    <value>Hinnang peab olema vahemikus 1 kuni 5</value>
+  </data>
+  <data name="SelectDishFirst" xml:space="preserve">
+    <value>Palun valige toit nimekirjast</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Seaded</value>
+  </data>
+  <data name="ThemeTitle" xml:space="preserve">
+    <value>Teema</value>
+  </data>
+  <data name="LanguageTitle" xml:space="preserve">
+    <value>Keele valik</value>
+  </data>
+  <data name="SoundEnabled" xml:space="preserve">
+    <value>Helid sisse lülitatud</value>
+  </data>
+  <data name="FontSizeLabel" xml:space="preserve">
+    <value>Kirja suurus</value>
+  </data>
+  <data name="FollowSystem" xml:space="preserve">
+    <value>Süsteemi järgi</value>
+  </data>
+  <data name="LightTheme" xml:space="preserve">
+    <value>Hele teema</value>
+  </data>
+  <data name="DarkTheme" xml:space="preserve">
+    <value>Tume teema</value>
+  </data>
+  <data name="Estonian" xml:space="preserve">
+    <value>Eesti</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="RemoveFromDaily" xml:space="preserve">
+    <value>Eemalda päevamenüüst</value>
+  </data>
+  <data name="DishRemoved" xml:space="preserve">
+    <value>Toit on päevamenüüst eemaldatud</value>
+  </data>
+  <data name="DishAddedToDaily" xml:space="preserve">
+    <value>Toit on päevamenüüsse lisatud</value>
+  </data>
+</root>

@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Arvestus_project_TARpv24.Models;
 using Arvestus_project_TARpv24.Services;
@@ -36,19 +36,29 @@ namespace Arvestus_project_TARpv24.ViewModels
 
         public ICommand AddRatingCommand { get; }
 
-        public DishDetailViewModel(Dish dish, DatabaseService databaseService, SessionService sessionService)
+        public DishDetailViewModel(DatabaseService databaseService, SessionService sessionService)
         {
-            _dish = dish;
             _databaseService = databaseService;
             _sessionService = sessionService;
 
             AddRatingCommand = new Command(async () => await AddRatingAsync());
+        }
 
-            _ = LoadRatingsAsync();
+        public async Task InitializeAsync(Dish dish)
+        {
+            if (dish == null)
+            {
+                System.Diagnostics.Debug.WriteLine("DishDetailViewModel.InitializeAsync: dish is null");
+                return;
+            }
+            _dish = dish;
+            OnPropertyChanged(nameof(Dish));
+            await LoadRatingsAsync();
         }
 
         public async Task LoadRatingsAsync()
         {
+            if (_dish == null) return;
             try
             {
                 var list = await _databaseService.GetRatingsForDishAsync(_dish.Id);
@@ -69,6 +79,12 @@ namespace Arvestus_project_TARpv24.ViewModels
 
         private async Task AddRatingAsync()
         {
+            if (_dish == null)
+            {
+                await Shell.Current.DisplayAlert("Viga", "Toit pole valitud", "OK");
+                return;
+            }
+
             if (NewScore < 1 || NewScore > 5)
             {
                 await Shell.Current.DisplayAlert("Viga", "Hinnang peab olema vahemikus 1 kuni 5", "OK");
@@ -81,7 +97,8 @@ namespace Arvestus_project_TARpv24.ViewModels
                 {
                     DishId = _dish.Id,
                     Score = NewScore,
-                    Comment = NewComment
+                    Comment = string.IsNullOrWhiteSpace(NewComment) ? "Без коментария" : NewComment,
+                    Username = _sessionService.CurrentUser?.Username ?? "Külaline"
                 };
 
                 await _databaseService.SaveRatingAsync(rating);

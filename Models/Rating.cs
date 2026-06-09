@@ -14,6 +14,8 @@ namespace Arvestus_project_TARpv24.Models
 
         public string Comment { get; set; }
 
+        public string Username { get; set; }
+
         public string ImagePath { get; set; }
     }
 }
