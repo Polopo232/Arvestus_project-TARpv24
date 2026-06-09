@@ -5,49 +5,38 @@
              xmlns:models="clr-namespace:Arvestus_project_TARpv24.Models"
              x:Class="Arvestus_project_TARpv24.Views.DishDetailPage"
              x:DataType="vm:DishDetailViewModel"
-             Title="Toidu andmed">
+             Title="Toidu Andmed">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="20">
 
-            <Label Text="{Binding SelectedDish.Name}" FontSize="24" FontAttributes="Bold" />
-            <Label Text="{Binding SelectedDish.Category}" FontSize="14" FontAttributes="Italic" TextColor="Gray" />
-            <Label Text="{Binding SelectedDish.Description}" FontSize="16" />
+            <Border StrokeShape="RoundRectangle 10" Padding="15" BackgroundColor="#F5F5F5">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{Binding Dish.Name}" FontSize="24" FontAttributes="Bold" />
+                    <Label Text="{Binding Dish.Category}" FontSize="14" FontAttributes="Italic" TextColor="Gray" />
+                    <Label Text="{Binding Dish.Description}" FontSize="16" />
 
-            <HorizontalStackLayout Spacing="5">
-                <Label Text="Allergeenid:" FontAttributes="Bold" TextColor="Red" />
-                <Label Text="{Binding SelectedDish.Allergens}" TextColor="Red" />
-            </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="5" Margin="0,10,0,0">
+                        <Label Text="Allergeenid:" FontSize="14" FontAttributes="Bold" TextColor="Red" />
+                        <Label Text="{Binding Dish.Allergens}" FontSize="14" TextColor="Red" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
 
-            <BoxView HeightRequest="1" Color="#E0E0E0" />
+            <Label Text="Hinnangud ja tagasiside" FontSize="18" FontAttributes="Bold" />
 
-            <Label Text="Lisa arvustus" FontSize="18" FontAttributes="Bold" />
-
-            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                <Label Text="Hinne (1-5):" VerticalOptions="Center" />
-                <Stepper Minimum="1" Maximum="5" Increment="1" Value="{Binding NewScore}" />
-                <Label Text="{Binding NewScore}" FontAttributes="Bold" VerticalOptions="Center" />
-            </HorizontalStackLayout>
-
-            <Entry Placeholder="Kirjutage oma arvustus siia..." Text="{Binding NewComment}" />
-
-            <Button Text="Saada arvustus" Command="{Binding AddRatingCommand}" BackgroundColor="#512BD4" TextColor="White" />
-
-            <BoxView HeightRequest="1" Color="#E0E0E0" />
-
-            <Label Text="Kasutajate arvustused" FontSize="18" FontAttributes="Bold" />
-
-            <CollectionView ItemsSource="{Binding Ratings}" EmptyView="Arvustused puuduvad.">
+            <CollectionView ItemsSource="{Binding Ratings}" EmptyView="Sellel toidul puuduvad hinnangud.">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Rating">
-                        <Border StrokeShape="RoundRectangle 5" StrokeThickness="1" Stroke="#CCCCCC" Padding="10">
+                        <Border StrokeShape="RoundRectangle 5" Padding="10" Stroke="#E0E0E0">
                             <VerticalStackLayout Spacing="5">
                                 <HorizontalStackLayout Spacing="5">
-                                    <Label Text="Hinne:" FontAttributes="Bold" />
+                                    <Label Text="Hinnang:" FontAttributes="Bold" />
                                     <Label Text="{Binding Score}" TextColor="Orange" FontAttributes="Bold" />
+                                    <Label Text="/ 5" TextColor="Gray" />
                                 </HorizontalStackLayout>
                                 <Label Text="{Binding Comment}" FontSize="14" />
                             </VerticalStackLayout>
@@ -55,6 +44,29 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" IsVisible="{Binding Session.IsLoggedIn}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Lisa oma hinnang" FontSize="16" FontAttributes="Bold" />
+
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <Label Text="Hinne (1-5):" VerticalOptions="Center" />
+                        <Stepper Minimum="1" Maximum="5" Value="{Binding NewScore}" />
+                        <Label Text="{Binding NewScore}" FontAttributes="Bold" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <Entry Placeholder="Sinu kommentaar..." Text="{Binding NewComment}" />
+
+                    <Button Text="Salvesta hinnang" 
+                            Command="{Binding AddRatingCommand}" 
+                            BackgroundColor="#512BD4" 
+                            TextColor="White" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" IsVisible="{Binding Session.IsLoggedOut}" BackgroundColor="#FFF3CD">
+                <Label Text="Hinnangu jätmiseks peate sisse logima." HorizontalOptions="Center" TextColor="#856404" />
+            </Border>
 
         </VerticalStackLayout>
     </ScrollView>

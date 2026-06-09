@@ -6,10 +6,10 @@ namespace Arvestus_project_TARpv24.Views
 {
     public partial class DishDetailPage : ContentPage
     {
-        public DishDetailPage(Dish dish, DatabaseService databaseService)
+        public DishDetailPage(Dish dish, DatabaseService databaseService, SessionService sessionService)
         {
             InitializeComponent();
-            BindingContext = new DishDetailViewModel(dish, databaseService);
+            BindingContext = new DishDetailViewModel(dish, databaseService, sessionService);
         }
     }
 }
