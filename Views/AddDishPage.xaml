@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Arvestus_project_TARpv24.ViewModels"
+             x:Class="Arvestus_project_TARpv24.Views.AddDishPage"
+             x:DataType="vm:AddDishViewModel"
+             Title="Uue toidu lisamine">
+
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="15">
+
+            <Label Text="Toidu andmed" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10" />
+
+            <Entry Placeholder="Toidu nimetus (nt. Seljanka)" Text="{Binding Name}" />
+            <Entry Placeholder="Kategooria (nt. Supid, Praed)" Text="{Binding Category}" />
+            <Editor Placeholder="Kirjeldus..." HeightRequest="100" Text="{Binding Description}" />
+            <Entry Placeholder="Allergeenid (nt. Laktoos, Gluteen)" Text="{Binding Allergens}" />
+
+            <Button Text="Salvesta toit" 
+                    Command="{Binding SaveDishCommand}" 
+                    BackgroundColor="#512BD4" 
+                    TextColor="White" 
+                    Margin="0,10,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
