@@ -30,6 +30,7 @@ namespace Arvestus_project_TARpv24
             builder.Services.AddSingleton<SettingsService>();
             builder.Services.AddSingleton<ThemeService>();
             builder.Services.AddSingleton<SoundService>();
+            builder.Services.AddSingleton<PhotoService>();
             builder.Services.AddSingleton<LocalizationService>();
             builder.Services.AddSingleton<SessionService>();
 

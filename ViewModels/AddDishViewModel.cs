@@ -8,10 +8,12 @@ namespace Arvestus_project_TARpv24.ViewModels
     {
         private readonly DatabaseService _databaseService;
         private readonly LocalizationService _localization;
+        private readonly PhotoService _photoService;
         private string _name;
         private string _description;
         private string _category;
         private string _allergens;
+        private string _imagePath;
 
         public string Name
         {
@@ -37,13 +39,31 @@ namespace Arvestus_project_TARpv24.ViewModels
             set => SetProperty(ref _allergens, value);
         }
 
-        public ICommand SaveDishCommand { get; }
+        public string ImagePath
+        {
+            get => _imagePath;
+            set => SetProperty(ref _imagePath, value, onChanged: () => OnPropertyChanged(nameof(HasImage)));
+        }
 
-        public AddDishViewModel(DatabaseService databaseService, LocalizationService localization)
+        public bool HasImage => !string.IsNullOrWhiteSpace(_imagePath);
+
+        public ICommand SaveDishCommand { get; }
+        public ICommand PickPhotoCommand { get; }
+
+        public AddDishViewModel(DatabaseService databaseService, LocalizationService localization, PhotoService photoService)
         {
             _databaseService = databaseService;
             _localization = localization;
+            _photoService = photoService;
             SaveDishCommand = new Command(async () => await SaveDishAsync());
+            PickPhotoCommand = new Command(async () => await PickPhotoAsync());
+        }
+
+        private async Task PickPhotoAsync()
+        {
+            var path = await _photoService.PickPhotoAsync();
+            if (path != null)
+                ImagePath = path;
         }
 
         private async Task SaveDishAsync()
@@ -61,7 +81,8 @@ namespace Arvestus_project_TARpv24.ViewModels
                     Name = Name,
                     Description = Description,
                     Category = Category,
-                    Allergens = string.IsNullOrWhiteSpace(Allergens) ? "Puuduvad" : Allergens
+                    Allergens = string.IsNullOrWhiteSpace(Allergens) ? "Puuduvad" : Allergens,
+                    ImagePath = ImagePath
                 };
 
                 await _databaseService.SaveDishAsync(newDish);
@@ -70,6 +91,7 @@ namespace Arvestus_project_TARpv24.ViewModels
                 Description = string.Empty;
                 Category = string.Empty;
                 Allergens = string.Empty;
+                ImagePath = string.Empty;
 
                 await Shell.Current.DisplayAlert(_localization["SuccessTitle"], _localization["DishSaved"], _localization["OkButton"]);
                 await Shell.Current.Navigation.PopAsync();

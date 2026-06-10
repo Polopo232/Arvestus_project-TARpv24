@@ -152,9 +152,9 @@ namespace Arvestus_project_TARpv24.ViewModels
         {
             if (dish == null) return;
             await _soundService.PlayClickSoundAsync();
-            var viewModel = _serviceProvider.GetRequiredService<DishDetailViewModel>();
-            await viewModel.InitializeAsync(dish);
             var page = _serviceProvider.GetRequiredService<DishDetailPage>();
+            var viewModel = (DishDetailViewModel)page.BindingContext;
+            await viewModel.InitializeAsync(dish);
             await Shell.Current.Navigation.PushAsync(page);
         }
     }

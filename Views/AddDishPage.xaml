@@ -17,6 +17,19 @@
             <Editor Placeholder="{loc:Translate DescriptionPlaceholder}" HeightRequest="100" Text="{Binding Description}" />
             <Entry Placeholder="{loc:Translate AllergensPlaceholder}" Text="{Binding Allergens}" />
 
+            <Button Text="{loc:Translate AddPhoto}"
+                    Command="{Binding PickPhotoCommand}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"
+                    TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+
+            <Border IsVisible="{Binding HasImage}"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="0"
+                    HeightRequest="180"
+                    Margin="0,5,0,0">
+                <Image Source="{Binding ImagePath}" Aspect="AspectFill" />
+            </Border>
+
             <Button Text="{loc:Translate SaveDish}"
                     Command="{Binding SaveDishCommand}"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"

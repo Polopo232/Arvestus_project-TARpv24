@@ -8,6 +8,7 @@
         <ResourceDictionary>
             <converters:RatingVisibilityConverter x:Key="RatingVisibilityConverter" />
             <converters:GreaterThanZeroConverter x:Key="GreaterThanZeroConverter" />
+            <converters:IsStringNotEmptyConverter x:Key="IsStringNotEmptyConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />

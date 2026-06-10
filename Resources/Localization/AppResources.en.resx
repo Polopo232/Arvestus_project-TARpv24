@@ -210,4 +210,10 @@
   <data name="LoadError" xml:space="preserve">
     <value>Loading error</value>
   </data>
+  <data name="AddPhoto" xml:space="preserve">
+    <value>Add photo</value>
+  </data>
+  <data name="PhotoSelected" xml:space="preserve">
+    <value>Photo selected ✓</value>
+  </data>
 </root>

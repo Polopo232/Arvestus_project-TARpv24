@@ -210,4 +210,10 @@
   <data name="LoadError" xml:space="preserve">
     <value>Viga laadimisel</value>
   </data>
+  <data name="AddPhoto" xml:space="preserve">
+    <value>Lisa foto</value>
+  </data>
+  <data name="PhotoSelected" xml:space="preserve">
+    <value>Foto valitud ✓</value>
+  </data>
 </root>

@@ -210,4 +210,10 @@
   <data name="LoadError" xml:space="preserve">
     <value>Ошибка загрузки</value>
   </data>
+  <data name="AddPhoto" xml:space="preserve">
+    <value>Добавить фото</value>
+  </data>
+  <data name="PhotoSelected" xml:space="preserve">
+    <value>Фото выбрано ✓</value>
+  </data>
 </root>
