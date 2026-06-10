@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Arvestus_project_TARpv24.ViewModels"
+             xmlns:loc="clr-namespace:Arvestus_project_TARpv24.Localization"
              x:Class="Arvestus_project_TARpv24.Views.ProfilePage"
              x:DataType="vm:ProfileViewModel"
-             Title="Kasutaja Profiil">
+             Title="{loc:Translate ProfileTitle}">
 
     <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="Center">
 
@@ -18,22 +19,22 @@
         </Border>
 
         <VerticalStackLayout Spacing="10" IsVisible="{Binding Session.IsLoggedOut}">
-            <Entry Placeholder="Kasutajanimi" Text="{Binding Username}" />
-            <Entry Placeholder="Parool" IsPassword="True" Text="{Binding Password}" />
+            <Entry Placeholder="{loc:Translate UsernamePlaceholder}" Text="{Binding Username}" />
+            <Entry Placeholder="{loc:Translate PasswordPlaceholder}" IsPassword="True" Text="{Binding Password}" />
 
-            <Button Text="Logi sisse"
+            <Button Text="{loc:Translate Login}"
                     Command="{Binding LoginCommand}"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                     TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
 
-            <Button Text="Registreeru"
+            <Button Text="{loc:Translate Register}"
                     Command="{Binding RegisterCommand}"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray600}}"
                     TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray200}}" />
         </VerticalStackLayout>
 
-        <Button Text="Logi välja" 
-                Command="{Binding LogoutCommand}" 
+        <Button Text="{loc:Translate Logout}"
+                Command="{Binding LogoutCommand}"
                 IsVisible="{Binding Session.IsLoggedIn}" 
                 BackgroundColor="Red" 
                 TextColor="White" />

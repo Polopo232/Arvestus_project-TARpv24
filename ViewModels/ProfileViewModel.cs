@@ -7,9 +7,9 @@ namespace Arvestus_project_TARpv24.ViewModels
     {
         private readonly DatabaseService _databaseService;
         private readonly SessionService _sessionService;
+        private readonly LocalizationService _localization;
         private string _username;
         private string _password;
-        private string _currentStatus = "Olete sisse loginud kui Külaline";
 
         public SessionService Session => _sessionService;
 
@@ -27,29 +27,37 @@ namespace Arvestus_project_TARpv24.ViewModels
 
         public string CurrentStatus
         {
-            get => _currentStatus;
-            set => SetProperty(ref _currentStatus, value);
+            get
+            {
+                var user = _sessionService.CurrentUser;
+                return user == null
+                    ? _localization["GuestStatus"]
+                    : string.Format(_localization["UserStatus"], user.Username, user.Role);
+            }
         }
 
         public ICommand LoginCommand { get; }
         public ICommand RegisterCommand { get; }
         public ICommand LogoutCommand { get; }
 
-        public ProfileViewModel(DatabaseService databaseService, SessionService sessionService)
+        public ProfileViewModel(DatabaseService databaseService, SessionService sessionService, LocalizationService localization)
         {
             _databaseService = databaseService;
             _sessionService = sessionService;
+            _localization = localization;
 
             LoginCommand = new Command(async () => await LoginAsync());
             RegisterCommand = new Command(async () => await RegisterAsync());
             LogoutCommand = new Command(Logout);
+
+            _localization.PropertyChanged += (_, __) => OnPropertyChanged(nameof(CurrentStatus));
         }
 
         private async Task LoginAsync()
         {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
-                await Shell.Current.DisplayAlert("Viga", "Palun täitke kaikki väljad", "OK");
+                await Shell.Current.DisplayAlert(_localization["ErrorTitle"], _localization["FillAllFields"], _localization["OkButton"]);
                 return;
             }
 
@@ -57,13 +65,13 @@ namespace Arvestus_project_TARpv24.ViewModels
             if (user != null)
             {
                 _sessionService.CurrentUser = user;
-                CurrentStatus = $"Kasutaja: {user.Username} ({user.Role})";
+                OnPropertyChanged(nameof(CurrentStatus));
                 Username = string.Empty;
                 Password = string.Empty;
             }
             else
             {
-                await Shell.Current.DisplayAlert("Viga", "Vale kasutajanimi või parool", "OK");
+                await Shell.Current.DisplayAlert(_localization["ErrorTitle"], _localization["WrongCredentials"], _localization["OkButton"]);
             }
         }
 
@@ -71,26 +79,26 @@ namespace Arvestus_project_TARpv24.ViewModels
         {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
-                await Shell.Current.DisplayAlert("Viga", "Palun täitke kõik väljad", "OK");
+                await Shell.Current.DisplayAlert(_localization["ErrorTitle"], _localization["FillAllFields"], _localization["OkButton"]);
                 return;
             }
 
             var success = await _databaseService.RegisterUserAsync(Username, Password);
             if (success)
             {
-                await Shell.Current.DisplayAlert("Edu", "Kasutaja on edukalt registreeritud", "OK");
+                await Shell.Current.DisplayAlert(_localization["SuccessTitle"], _localization["UserRegistered"], _localization["OkButton"]);
                 await LoginAsync();
             }
             else
             {
-                await Shell.Current.DisplayAlert("Viga", "See kasutajanimi on juba võetud", "OK");
+                await Shell.Current.DisplayAlert(_localization["ErrorTitle"], _localization["UsernameTaken"], _localization["OkButton"]);
             }
         }
 
         private void Logout()
         {
             _sessionService.CurrentUser = null;
-            CurrentStatus = "Olete sisse loginud kui Külaline";
+            OnPropertyChanged(nameof(CurrentStatus));
         }
     }
 }

@@ -180,6 +180,9 @@
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
   <data name="RemoveFromDaily" xml:space="preserve">
     <value>Eemalda päevamenüüst</value>
   </data>
@@ -188,5 +191,23 @@
   </data>
   <data name="DishAddedToDaily" xml:space="preserve">
     <value>Toit on päevamenüüsse lisatud</value>
+  </data>
+  <data name="ModeButton" xml:space="preserve">
+    <value>Režiim</value>
+  </data>
+  <data name="AddSelectedToDaily" xml:space="preserve">
+    <value>Lisa valitud toit päevamenüüsse</value>
+  </data>
+  <data name="ScoreLabel" xml:space="preserve">
+    <value>Hinnang:</value>
+  </data>
+  <data name="SoundTitle" xml:space="preserve">
+    <value>Helid</value>
+  </data>
+  <data name="DishNotSelected" xml:space="preserve">
+    <value>Toit pole valitud</value>
+  </data>
+  <data name="LoadError" xml:space="preserve">
+    <value>Viga laadimisel</value>
   </data>
 </root>

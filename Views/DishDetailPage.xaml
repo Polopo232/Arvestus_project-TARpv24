@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Arvestus_project_TARpv24.ViewModels"
              xmlns:models="clr-namespace:Arvestus_project_TARpv24.Models"
+             xmlns:loc="clr-namespace:Arvestus_project_TARpv24.Localization"
              x:Class="Arvestus_project_TARpv24.Views.DishDetailPage"
              x:DataType="vm:DishDetailViewModel"
-             Title="Toidu Andmed">
+             Title="{loc:Translate DishDetailTitle}">
 
     <ScrollView Padding="20">
         <VerticalStackLayout Spacing="20">
@@ -21,7 +22,7 @@
                            TextColor="{AppThemeBinding Light={StaticResource Gray700}, Dark={StaticResource Gray300}}" />
 
                     <HorizontalStackLayout Spacing="5" Margin="0,10,0,0">
-                        <Label Text="Allergeenid:" FontSize="14" FontAttributes="Bold"
+                        <Label Text="{loc:Translate Allergens}" FontSize="14" FontAttributes="Bold"
                                TextColor="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
                         <Label Text="{Binding Dish.Allergens}" FontSize="14"
                                TextColor="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
@@ -29,10 +30,10 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Label Text="Hinnangud ja tagasiside" FontSize="18" FontAttributes="Bold"
+            <Label Text="{loc:Translate RatingLabel}" FontSize="18" FontAttributes="Bold"
                    TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
 
-            <CollectionView ItemsSource="{Binding Ratings}" EmptyView="Sellel toidul puuduvad hinnangud.">
+            <CollectionView ItemsSource="{Binding Ratings}" EmptyView="{loc:Translate NoRatings}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                 </CollectionView.ItemsLayout>
@@ -43,7 +44,7 @@
                                 BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}">
                             <VerticalStackLayout Spacing="5">
                                 <HorizontalStackLayout Spacing="5">
-                                    <Label Text="Hinnang:" FontAttributes="Bold"
+                                    <Label Text="{loc:Translate ScoreLabel}" FontAttributes="Bold"
                                            TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
                                     <Label Text="{Binding Score}" TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}" FontAttributes="Bold" />
                                     <Label Text="/ 5" TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
@@ -62,20 +63,20 @@
             <Border StrokeShape="RoundRectangle 10" Padding="15" IsVisible="{Binding Session.IsLoggedIn}"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}">
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Lisa oma hinnang" FontSize="16" FontAttributes="Bold"
+                    <Label Text="{loc:Translate AddRating}" FontSize="16" FontAttributes="Bold"
                            TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
 
                     <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                        <Label Text="Hinne (1-5):" VerticalOptions="Center"
+                        <Label Text="{loc:Translate RateLabel}" VerticalOptions="Center"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
                         <Stepper Minimum="1" Maximum="5" Value="{Binding NewScore}" />
                         <Label Text="{Binding NewScore}" FontAttributes="Bold" VerticalOptions="Center"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
                     </HorizontalStackLayout>
 
-                    <Entry Placeholder="Sinu kommentaar..." Text="{Binding NewComment}" />
+                    <Entry Placeholder="{loc:Translate CommentPlaceholder}" Text="{Binding NewComment}" />
 
-                    <Button Text="Salvesta hinnang"
+                    <Button Text="{loc:Translate SaveRating}"
                             Command="{Binding AddRatingCommand}"
                             BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                             TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
@@ -84,7 +85,7 @@
 
             <Border StrokeShape="RoundRectangle 10" Padding="15" IsVisible="{Binding Session.IsLoggedOut}"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}">
-                <Label Text="Hinnangu jätmiseks peate sisse logima." HorizontalOptions="Center"
+                <Label Text="{loc:Translate LoginRequiredRating}" HorizontalOptions="Center"
                        TextColor="{AppThemeBinding Light={StaticResource SecondaryDarkText}, Dark={StaticResource Gray400}}" />
             </Border>
 

@@ -195,4 +195,19 @@
   <data name="DishNotSelected" xml:space="preserve">
     <value>Блюдо не выбрано</value>
   </data>
+  <data name="ModeButton" xml:space="preserve">
+    <value>Режим</value>
+  </data>
+  <data name="AddSelectedToDaily" xml:space="preserve">
+    <value>Добавить выбранное блюдо в меню</value>
+  </data>
+  <data name="ScoreLabel" xml:space="preserve">
+    <value>Оценка:</value>
+  </data>
+  <data name="SoundTitle" xml:space="preserve">
+    <value>Звуки</value>
+  </data>
+  <data name="LoadError" xml:space="preserve">
+    <value>Ошибка загрузки</value>
+  </data>
 </root>

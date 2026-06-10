@@ -12,6 +12,7 @@ namespace Arvestus_project_TARpv24.ViewModels
         private readonly SessionService _sessionService;
         private readonly IServiceProvider _serviceProvider;
         private readonly SoundService _soundService;
+        private readonly LocalizationService _localization;
         private List<Dish> _allDishes = new List<Dish>();
         private string _searchText;
 
@@ -32,12 +33,13 @@ namespace Arvestus_project_TARpv24.ViewModels
         public ICommand AddDishCommand { get; }
         public ICommand SelectDishCommand { get; }
 
-        public MenuViewModel(DatabaseService databaseService, SessionService sessionService, IServiceProvider serviceProvider, SoundService soundService)
+        public MenuViewModel(DatabaseService databaseService, SessionService sessionService, IServiceProvider serviceProvider, SoundService soundService, LocalizationService localization)
         {
             _databaseService = databaseService;
             _sessionService = sessionService;
             _serviceProvider = serviceProvider;
             _soundService = soundService;
+            _localization = localization;
 
             LoadDishesCommand = new Command(async () => await LoadDishesAsync());
             AddDishCommand = new Command(async () => await NavigateToAddDishAsync());
@@ -55,7 +57,7 @@ namespace Arvestus_project_TARpv24.ViewModels
             {
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    await Shell.Current.DisplayAlert("Viga laadimisel", ex.Message, "OK");
+                    await Shell.Current.DisplayAlert(_localization["LoadError"], ex.Message, _localization["OkButton"]);
                 });
             }
         }

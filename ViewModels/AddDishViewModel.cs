@@ -7,6 +7,7 @@ namespace Arvestus_project_TARpv24.ViewModels
     public class AddDishViewModel : BaseViewModel
     {
         private readonly DatabaseService _databaseService;
+        private readonly LocalizationService _localization;
         private string _name;
         private string _description;
         private string _category;
@@ -38,9 +39,10 @@ namespace Arvestus_project_TARpv24.ViewModels
 
         public ICommand SaveDishCommand { get; }
 
-        public AddDishViewModel(DatabaseService databaseService)
+        public AddDishViewModel(DatabaseService databaseService, LocalizationService localization)
         {
             _databaseService = databaseService;
+            _localization = localization;
             SaveDishCommand = new Command(async () => await SaveDishAsync());
         }
 
@@ -48,7 +50,7 @@ namespace Arvestus_project_TARpv24.ViewModels
         {
             if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Category))
             {
-                await Shell.Current.DisplayAlert("Viga", "Nimi ja Kategooria on kohustuslikud väljad", "OK");
+                await Shell.Current.DisplayAlert(_localization["ErrorTitle"], _localization["FillNameCategory"], _localization["OkButton"]);
                 return;
             }
 
@@ -69,12 +71,12 @@ namespace Arvestus_project_TARpv24.ViewModels
                 Category = string.Empty;
                 Allergens = string.Empty;
 
-                await Shell.Current.DisplayAlert("Edu", "Toit on edukalt lisatud menüüsse", "OK");
+                await Shell.Current.DisplayAlert(_localization["SuccessTitle"], _localization["DishSaved"], _localization["OkButton"]);
                 await Shell.Current.Navigation.PopAsync();
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Viga", ex.Message, "OK");
+                await Shell.Current.DisplayAlert(_localization["ErrorTitle"], ex.Message, _localization["OkButton"]);
             }
         }
     }

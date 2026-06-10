@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Arvestus_project_TARpv24.ViewModels"
+             xmlns:loc="clr-namespace:Arvestus_project_TARpv24.Localization"
              x:Class="Arvestus_project_TARpv24.Views.SettingsPage"
              x:DataType="vm:SettingsViewModel"
-             Title="Seaded">
+             Title="{loc:Translate SettingsTitle}">
 
     <ScrollView Padding="20">
         <VerticalStackLayout Spacing="25">
@@ -13,17 +14,17 @@
             <Border StrokeShape="RoundRectangle 10" Padding="15"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
                 <VerticalStackLayout Spacing="15">
-                    <Label Text="Teema"
+                    <Label Text="{loc:Translate ThemeTitle}"
                            FontSize="18"
                            FontAttributes="Bold" />
 
-                    <RadioButton Content="Süsteemi järgi"
+                    <RadioButton Content="{loc:Translate FollowSystem}"
                                  IsChecked="{Binding IsFollowSystem}"
                                  GroupName="ThemeGroup" />
-                    <RadioButton Content="Hele teema"
+                    <RadioButton Content="{loc:Translate LightTheme}"
                                  IsChecked="{Binding IsLightTheme}"
                                  GroupName="ThemeGroup" />
-                    <RadioButton Content="Tume teema"
+                    <RadioButton Content="{loc:Translate DarkTheme}"
                                  IsChecked="{Binding IsDarkTheme}"
                                  GroupName="ThemeGroup" />
                 </VerticalStackLayout>
@@ -33,17 +34,17 @@
             <Border StrokeShape="RoundRectangle 10" Padding="15"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
                 <VerticalStackLayout Spacing="15">
-                    <Label Text="Keele valik"
+                    <Label Text="{loc:Translate LanguageTitle}"
                            FontSize="18"
                            FontAttributes="Bold" />
 
-                    <RadioButton Content="Eesti"
+                    <RadioButton Content="{loc:Translate Estonian}"
                                  IsChecked="{Binding IsEstonian}"
                                  GroupName="LanguageGroup" />
-                    <RadioButton Content="English"
+                    <RadioButton Content="{loc:Translate English}"
                                  IsChecked="{Binding IsEnglish}"
                                  GroupName="LanguageGroup" />
-                    <RadioButton Content="Русский"
+                    <RadioButton Content="{loc:Translate Russian}"
                                  IsChecked="{Binding IsRussian}"
                                  GroupName="LanguageGroup" />
                 </VerticalStackLayout>
@@ -53,11 +54,11 @@
             <Border StrokeShape="RoundRectangle 10" Padding="15"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
                 <VerticalStackLayout Spacing="15">
-                    <Label Text="Helid"
+                    <Label Text="{loc:Translate SoundTitle}"
                            FontSize="18"
                            FontAttributes="Bold" />
                     <HorizontalStackLayout Spacing="10">
-                        <Label Text="Helid sisse lülitatud" VerticalOptions="Center" />
+                        <Label Text="{loc:Translate SoundEnabled}" VerticalOptions="Center" />
                         <Switch IsToggled="{Binding SoundEnabled}" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
@@ -67,7 +68,7 @@
             <Border StrokeShape="RoundRectangle 10" Padding="15"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
                 <VerticalStackLayout Spacing="15">
-                    <Label Text="Kirja suurus"
+                    <Label Text="{loc:Translate FontSizeLabel}"
                            FontSize="18"
                            FontAttributes="Bold" />
 

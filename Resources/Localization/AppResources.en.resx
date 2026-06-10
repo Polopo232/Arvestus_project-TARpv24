@@ -189,4 +189,25 @@
   <data name="DishAddedToDaily" xml:space="preserve">
     <value>The dish has been added to the daily menu</value>
   </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="ModeButton" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="AddSelectedToDaily" xml:space="preserve">
+    <value>Add selected dish to daily menu</value>
+  </data>
+  <data name="ScoreLabel" xml:space="preserve">
+    <value>Score:</value>
+  </data>
+  <data name="SoundTitle" xml:space="preserve">
+    <value>Sounds</value>
+  </data>
+  <data name="DishNotSelected" xml:space="preserve">
+    <value>Dish not selected</value>
+  </data>
+  <data name="LoadError" xml:space="preserve">
+    <value>Loading error</value>
+  </data>
 </root>

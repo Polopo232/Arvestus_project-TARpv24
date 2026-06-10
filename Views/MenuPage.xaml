@@ -3,19 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Arvestus_project_TARpv24.ViewModels"
              xmlns:models="clr-namespace:Arvestus_project_TARpv24.Models"
+             xmlns:loc="clr-namespace:Arvestus_project_TARpv24.Localization"
              x:Class="Arvestus_project_TARpv24.Views.MenuPage"
              x:DataType="vm:MenuViewModel"
-             Title="Menüü">
+             Title="{loc:Translate MenuTab}">
 
     <Grid RowDefinitions="Auto, *, Auto" Padding="20" RowSpacing="10">
 
         <SearchBar Grid.Row="0"
-                   Placeholder="Otsi toitu voi kategooriat..."
+                   Placeholder="{loc:Translate SearchPlaceholder}"
                    Text="{Binding SearchText}" />
 
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Dishes}"
-                        EmptyView="Toite ei leitud.">
+                        EmptyView="{loc:Translate NoDishesFound}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="15" />
             </CollectionView.ItemsLayout>
@@ -54,7 +55,7 @@
                                    FontSize="14" />
 
                             <HorizontalStackLayout Spacing="5" Margin="0,5,0,0">
-                                <Label Text="Allergeenid:" FontSize="12" FontAttributes="Bold"
+                                <Label Text="{loc:Translate Allergens}" FontSize="12" FontAttributes="Bold"
                                        TextColor="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
                                 <Label Text="{Binding Allergens}" FontSize="12"
                                        TextColor="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
@@ -66,7 +67,7 @@
         </CollectionView>
 
         <Button Grid.Row="2"
-            Text="Lisa uus toit"
+            Text="{loc:Translate AddDish}"
             Command="{Binding AddDishCommand}"
             IsVisible="{Binding Session.IsAdmin}"
             BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"

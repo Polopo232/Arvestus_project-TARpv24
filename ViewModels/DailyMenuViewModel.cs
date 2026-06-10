@@ -12,6 +12,7 @@ namespace Arvestus_project_TARpv24.ViewModels
         private readonly SessionService _sessionService;
         private readonly IServiceProvider _serviceProvider;
         private readonly SoundService _soundService;
+        private readonly LocalizationService _localization;
         private DateTime _selectedDate = DateTime.Today;
         private Dish _selectedDish;
         private bool _isSelectionMode;
@@ -48,12 +49,13 @@ namespace Arvestus_project_TARpv24.ViewModels
         public ICommand RemoveFromDailyCommand { get; }
         public ICommand ToggleSelectionModeCommand { get; }
 
-        public DailyMenuViewModel(DatabaseService databaseService, SessionService sessionService, IServiceProvider serviceProvider, SoundService soundService)
+        public DailyMenuViewModel(DatabaseService databaseService, SessionService sessionService, IServiceProvider serviceProvider, SoundService soundService, LocalizationService localization)
         {
             _databaseService = databaseService;
             _sessionService = sessionService;
             _serviceProvider = serviceProvider;
             _soundService = soundService;
+            _localization = localization;
 
             LoadDailyMenuCommand = new Command(async () => await LoadDailyMenuAsync());
             SelectDishCommand = new Command<Dish>(async (dish) => await OpenDishDetailAsync(dish));
@@ -109,7 +111,7 @@ namespace Arvestus_project_TARpv24.ViewModels
         {
             if (SelectedDish == null)
             {
-                await Shell.Current.DisplayAlert("Viga", "Palun valige toit nimekirjast", "OK");
+                await Shell.Current.DisplayAlert(_localization["ErrorTitle"], _localization["SelectDishFirst"], _localization["OkButton"]);
                 return;
             }
 

@@ -3,15 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Arvestus_project_TARpv24.ViewModels"
              xmlns:models="clr-namespace:Arvestus_project_TARpv24.Models"
+             xmlns:loc="clr-namespace:Arvestus_project_TARpv24.Localization"
              x:Class="Arvestus_project_TARpv24.Views.DailyMenuPage"
              x:DataType="vm:DailyMenuViewModel"
-             Title="Päevamenüü">
+             Title="{loc:Translate DailyMenuTitle}">
 
     <Grid RowDefinitions="Auto, *, Auto" Padding="20" RowSpacing="15">
 
         <HorizontalStackLayout Grid.Row="0" Spacing="10" VerticalOptions="Center">
             <DatePicker Date="{Binding SelectedDate}" Format="dd.MM.yyyy" />
-            <Button Text="Režiim"
+            <Button Text="{loc:Translate ModeButton}"
                     Command="{Binding ToggleSelectionModeCommand}"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource PrimaryDark}}"
                     TextColor="{AppThemeBinding Light={StaticResource SecondaryDarkText}, Dark={StaticResource PrimaryDarkText}}"
@@ -20,7 +21,7 @@
 
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding DailyDishes}"
-                        EmptyView="Valitud kuupäevaks ei ole menüüd koostatud.">
+                        EmptyView="{loc:Translate NoDailyMenu}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="15" />
             </CollectionView.ItemsLayout>
@@ -57,7 +58,7 @@
         </CollectionView>
 
         <Button Grid.Row="2"
-            Text="Lisa valitud toit päevamenüüsse"
+            Text="{loc:Translate AddSelectedToDaily}"
             Command="{Binding AddSelectedDishToDailyCommand}"
             IsVisible="{Binding Session.IsAdmin}"
             BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"

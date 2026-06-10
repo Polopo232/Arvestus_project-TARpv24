@@ -9,6 +9,7 @@ namespace Arvestus_project_TARpv24.ViewModels
     {
         private readonly DatabaseService _databaseService;
         private readonly SessionService _sessionService;
+        private readonly LocalizationService _localization;
         private Dish _dish;
         private int _newScore = 5;
         private string _newComment;
@@ -36,10 +37,11 @@ namespace Arvestus_project_TARpv24.ViewModels
 
         public ICommand AddRatingCommand { get; }
 
-        public DishDetailViewModel(DatabaseService databaseService, SessionService sessionService)
+        public DishDetailViewModel(DatabaseService databaseService, SessionService sessionService, LocalizationService localization)
         {
             _databaseService = databaseService;
             _sessionService = sessionService;
+            _localization = localization;
 
             AddRatingCommand = new Command(async () => await AddRatingAsync());
         }
@@ -81,13 +83,13 @@ namespace Arvestus_project_TARpv24.ViewModels
         {
             if (_dish == null)
             {
-                await Shell.Current.DisplayAlert("Viga", "Toit pole valitud", "OK");
+                await Shell.Current.DisplayAlert(_localization["ErrorTitle"], _localization["DishNotSelected"], _localization["OkButton"]);
                 return;
             }
 
             if (NewScore < 1 || NewScore > 5)
             {
-                await Shell.Current.DisplayAlert("Viga", "Hinnang peab olema vahemikus 1 kuni 5", "OK");
+                await Shell.Current.DisplayAlert(_localization["ErrorTitle"], _localization["RatingOutOfRange"], _localization["OkButton"]);
                 return;
             }
 
